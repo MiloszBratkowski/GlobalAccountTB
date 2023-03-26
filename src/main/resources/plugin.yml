@@ -1,9 +1,12 @@
-name: GlobalAccountTB
+name: '${project.name}'
 version: '${project.version}'
-main: pl.techbrat.spigot.globalaccounttb.GlobalAccountTB
+main: pl.techbrat.spigot.globalaccount.GlobalAccountTB
 api-version: 1.13
-prefix: prefix
-load: STARTUP
 authors: [TechBart]
-description: description
-website: website
+description: '${project.description}'
+website: '${project.url}'
+softdepend: [PlaceholderAPI]
+commands:
+  globalaccount:
+    aliases: [ga, gaccount, globacct]
+    permission: globaccttb.admin.command

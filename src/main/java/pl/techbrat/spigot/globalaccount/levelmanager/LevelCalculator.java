@@ -1,0 +1,25 @@
+package pl.techbrat.spigot.globalaccount.levelmanager;
+
+public interface LevelCalculator {
+
+    double getAccurateLevel(long experience);
+
+    long getExperience(double level);
+
+    default long getNextLevel(long experience) {
+        return (long) Math.floor(getAccurateLevel(experience))+1;
+    }
+
+    default long getRoundedLevel(long experience) {
+        return (long) Math.floor(getAccurateLevel(experience));
+    }
+
+    default long getWantingExperience(long experience) {
+        return getExperience(getNextLevel(experience)) - experience;
+    }
+
+    default long getLevelExperience(long experience) {
+        return experience - getExperience(getRoundedLevel(experience));
+    }
+
+}
