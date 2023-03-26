@@ -1,0 +1,9 @@
+name: GlobalAccountTB
+version: '${project.version}'
+main: pl.techbrat.spigot.globalaccounttb.GlobalAccountTB
+api-version: 1.13
+prefix: prefix
+load: STARTUP
+authors: [TechBart]
+description: description
+website: website
