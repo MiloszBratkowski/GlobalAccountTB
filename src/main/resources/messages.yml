@@ -5,6 +5,6 @@ command:
     user:
       info:
         - "&a<player>&7's account information:"
-        - "&7Level: &a<level> &7(&b<exp>&7/<wanting_exp>"
+        - "&7Level: &a<level> &7(&b<exp>&7/<next_level_exp>"
         - "&7Summed experience: &3<summed_exp>"
         - "&7Next level porgress: &a<progress>"

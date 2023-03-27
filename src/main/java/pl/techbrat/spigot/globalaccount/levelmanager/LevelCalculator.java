@@ -14,12 +14,20 @@ public interface LevelCalculator {
         return (long) Math.floor(getAccurateLevel(experience));
     }
 
+    default long getNextLevelExperience(long experience) {
+        return getExperience(getNextLevel(experience));
+    }
+
     default long getWantingExperience(long experience) {
-        return getExperience(getNextLevel(experience)) - experience;
+        return getNextLevelExperience(experience) - experience;
     }
 
     default long getLevelExperience(long experience) {
         return experience - getExperience(getRoundedLevel(experience));
+    }
+
+    default double getLevelProgress(long experience) {
+        return Math.round(100.0*getLevelExperience(experience)/getNextLevelExperience(experience))/100.0;
     }
 
 }

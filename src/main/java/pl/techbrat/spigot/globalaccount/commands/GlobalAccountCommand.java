@@ -15,15 +15,19 @@ public class GlobalAccountCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FormatMessages formater = FormatMessages.getInstance();
         if (args[0].equalsIgnoreCase("user")) {
-            if (args[1].equalsIgnoreCase("info")) {
-                PlayerAccount account = AccountsManager.getInstance().getAccount(Bukkit.getPlayer(args[2]));
-                sender.sendMessage(formater.getAccountInfo(args[2],
-                        String.valueOf(account.getLevelExperience()),
+            String player = args[1];
+            PlayerAccount account = AccountsManager.getInstance().getAccount(Bukkit.getPlayer(player));
+            if (args[2].equalsIgnoreCase("info")) {
+                sender.sendMessage(formater.getAccountInfo(player,
                         String.valueOf(account.getRoundedLevel()),
+                        String.valueOf(account.getLevelExperience()),
+                        String.valueOf(account.getNextLevelExperience()),
                         String.valueOf(account.getWantingExperience()),
                         String.valueOf(account.getExperience()),
-                        "23"));
+                        account.getLevelProgress()*100+"%"));
                 return true;
+            } else if (args[2].equalsIgnoreCase("addexp")) {
+                account.addExperience(Long.parseLong(args[3]));
             }
         }
         if (args[0].equals("calculate")) {

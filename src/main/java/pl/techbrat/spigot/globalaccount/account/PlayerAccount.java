@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import pl.techbrat.spigot.globalaccount.levelmanager.CalculatorManager;
+import pl.techbrat.spigot.globalaccount.levelmanager.LevelCalculator;
 
 import java.util.UUID;
 
@@ -31,6 +32,14 @@ public class PlayerAccount {
         return experience;
     }
 
+    public long addExperience(long value) {
+        return experience+=value;
+    }
+
+    public long getNextLevelExperience() {
+        return CalculatorManager.getInstance().getCalculator().getNextLevelExperience(experience);
+    }
+
     public long getWantingExperience() {
         return CalculatorManager.getInstance().getCalculator().getWantingExperience(experience);
     }
@@ -49,5 +58,9 @@ public class PlayerAccount {
 
     public double getAccurateLevel() {
         return CalculatorManager.getInstance().getCalculator().getAccurateLevel(experience);
+    }
+
+    public double getLevelProgress() {
+        return CalculatorManager.getInstance().getCalculator().getLevelProgress(experience);
     }
 }

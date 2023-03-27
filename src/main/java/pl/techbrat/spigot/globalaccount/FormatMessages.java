@@ -55,12 +55,13 @@ public class FormatMessages {
         return addColors(replacePrefix(configData.getMsg(patch)));
     }
 
-    public String getAccountInfo(String player, String exp, String level, String wantingExp, String summedExp, String progress) {
+    public String getAccountInfo(String player, String level, String exp, String nextLevelExp, String wantingExp, String summedExp, String progress) {
         return addColors(replacePrefix(configData.getMsg("command.globalaccount.user.info"))).
                 replace(", ", "\n").
                 replace("<player>", player).
                 replace("<level>", level).
                 replace("<exp>", exp).
+                replace("<next_level_exp>", nextLevelExp).
                 replace("<wanting_exp>", wantingExp).
                 replace("<summed_exp>", summedExp).
                 replace("<progress>", progress);
