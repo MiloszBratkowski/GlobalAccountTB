@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -37,14 +39,20 @@ public class ConfigData {
         File messagesFile = new File(plugin.getDataFolder()+"/messages.yml");
         messages = (HashMap<String, Object>) YamlConfiguration.loadConfiguration(messagesFile).getConfigurationSection("").getValues(true);
         File temp = new File(plugin.getDataFolder()+"/messages.temp");
-        try {FileUtils.copyInputStreamToFile(plugin.getResource("messages.yml"), temp);} catch (IOException e) {e.printStackTrace();}
+        try {
+            //FileUtils.copyInputStreamToFile(plugin.getResource("messages.yml"), temp);
+            Files.copy(plugin.getResource("messages.yml"), temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {e.printStackTrace();}
         defaultMessages = (HashMap<String, Object>)YamlConfiguration.loadConfiguration(temp).getConfigurationSection("").getValues(true);
         temp.delete();
 
         File configFile = new File(plugin.getDataFolder()+"/config.yml");
         config = (HashMap<String, Object>) YamlConfiguration.loadConfiguration(configFile).getConfigurationSection("").getValues(true);
         temp = new File(plugin.getDataFolder()+"/config.temp");
-        try {FileUtils.copyInputStreamToFile(plugin.getResource("config.yml"), temp);} catch (IOException e) {e.printStackTrace();}
+        try {
+            //FileUtils.copyInputStreamToFile(plugin.getResource("config.yml"), temp);
+            Files.copy(plugin.getResource("config.yml"), temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {e.printStackTrace();}
         defaultConfig = (HashMap<String, Object>)YamlConfiguration.loadConfiguration(temp).getConfigurationSection("").getValues(true);
         temp.delete();
 
@@ -96,7 +104,8 @@ public class ConfigData {
             if (!file.isFile() || forceCopy) {
                 try {
                     plugin.getLogger().log(Level.INFO, "Creating "+element+" ...");
-                    FileUtils.copyInputStreamToFile(plugin.getResource(element), file);
+                    Files.copy(plugin.getResource(element), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    //FileUtils.copyInputStreamToFile(plugin.getResource(element), file);
                     plugin.getLogger().log(Level.INFO, "File "+element+" created");
                 } catch (Exception e) {e.printStackTrace(); plugin.stopPlugin();}
             }
